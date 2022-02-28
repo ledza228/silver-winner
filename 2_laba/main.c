@@ -144,12 +144,23 @@ void process(char* directory){
 
 }
 
-int main(int argc[], char *argv[]){
+int main(int argc, char *argv[]){
 
+	if (argc < 3){
+		fprintf(stderr, "ERROR: not enough params\n");
+		fprintf(stderr, "usage: %s <dir> <out_file>", argv[0]);
+		exit(EXIT_FAILURE);
+	}
+	
 	char* directory = argv[1];
 	char* output_file = argv[2];
 
 	outputFile = fopen(output_file, "wr+");
+	if (outputFile == NULL){
+		fprintf(stderr, "can't open/create file - %s", output_file);
+		exit(EXIT_FAILURE);
+	}
+
 	process(directory);
 	
 	fclose(outputFile);
