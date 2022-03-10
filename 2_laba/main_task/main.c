@@ -139,7 +139,9 @@ void process(char* directory){
 	push(&dir_stack, directory);
 	
 	while (!isEmpty(&dir_stack)){
-		processDirectory(pop(&dir_stack));
+		char* dir_name = pop(&dir_stack);
+		processDirectory(dir_name);
+		free(dir_name);
 	}
 
 }
