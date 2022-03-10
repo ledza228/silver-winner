@@ -38,6 +38,6 @@ int main (int argc, char *argv[]){
 		putc(symb, stdout);
 
 	}
-
+	fclose(file);
 
 }
