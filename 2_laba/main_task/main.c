@@ -1,3 +1,4 @@
+#include <linux/limits.h>
 #include <stdio.h>
 #include <dirent.h>
 #include <stdlib.h>
@@ -67,10 +68,7 @@ int new_isDirectory(char* fileName){
 		fprintf(stderr, "error get file properties - %s", fileName);
 		fprintf(outputFile, "error get file properties - %s", fileName);
 	}
-	if (S_ISDIR(buff.st_mode)){
-		return 1;
-	}
-	return 0;
+	return S_ISDIR(buff.st_mode);
 }
 
 void processDirectory(char* dirName){
@@ -94,7 +92,7 @@ void processDirectory(char* dirName){
 		
 		char* name = dirFile->d_name;
 		
-		char* fullPath = malloc(256);
+		char* fullPath = malloc(PATH_MAX);
 		fullPath = strcpy(fullPath, dirName);
 		strcat(fullPath, name);
 
@@ -164,7 +162,8 @@ int main(int argc, char *argv[]){
 	}
 
 	process(directory);
-	
+		
+	printf("\n%s", argv[2]);
 	fclose(outputFile);
 	return 0;
 }

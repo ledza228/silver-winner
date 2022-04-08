@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
 	FILE* file = fopen(file_name, "w");
 
 	if (file == NULL){
-		printf("Error: can't open file %s", file_name);
+		perror("Error: can't open file");
 		return EXIT_FAILURE;
 	}
 
